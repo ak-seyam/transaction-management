@@ -1,0 +1,6 @@
+[submodule "transaction-management-system"]
+	path = transaction-management-system
+	url = git@github.com:ak-seyam/transaction-management-system.git
+[submodule "transaction-management-system-gateway"]
+	path = transaction-management-system-gateway
+	url = git@github.com:ak-seyam/transaction-management-system-gateway.git
