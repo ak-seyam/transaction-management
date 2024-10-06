@@ -38,10 +38,26 @@ sequenceDiagram
   TPS->>TPS: Check user balance
   alt User have enough bakance
     TPS->>TPS: Submit transaction
+    TPS->>DB: Create new balance checkpoint
     TPS->>Notificaiton: Notify the rest of the compoenents
     TPS->>Analytics: Send analytics events
   else User don't have balance
     TPS->>Notification: Publish failure event
     TPS->>Analytics: Send analytics events
+  end
+```
+
+### Balance check
+```mermaid
+sequenceDiagram
+  TPS->>DB: Get the last checkpoint
+  DB->>TPS: latest checkpoint
+  alt there is existing checkpoint
+    TPS->>DB: Get all transactions after this checkpoint
+    DB->>TPS: Trasactions
+    TPS->>TPS: Calculate balance
+  else no checkpoints
+    TPS->>DB: Get all transactions for this user (In this case it should be none)
+    TPS->>TPS: calculcate the balance from card provisioned limit
   end
 ```
