@@ -81,3 +81,13 @@ sequenceDiagram
     TPS->>Analytics: Send analytics events
   end
 ```
+
+## Running the project
+### System Requirements
+- protoc
+- docker & docker compose
+- node > v18.19.x 
+### How to run
+1. `docker compose up` to start postgresql and kafka
+2. run `npm install`in every submodule
+3. run `npm run start:dev` to start the dev server
