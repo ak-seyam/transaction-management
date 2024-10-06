@@ -61,3 +61,23 @@ sequenceDiagram
     TPS->>TPS: calculcate the balance from card provisioned limit
   end
 ```
+
+### Clearing
+```mermaid
+sequenceDiagram
+  PSP->>Gateway: Clearing confirmed
+  Gateway->>TPS: Submit Clearing event
+  TPS-->>Kafka: Create event
+  TPS->>Gateway: Ack
+  Gateway->>PSP: Final status
+  Kafka-->>TPS: Get transaction event
+  TPS->>TPS: Check if user got auth for this clear
+  alt Got Auth
+    TPS->>TPS: Submit clreaing
+    TPS->>Notificaiton: Notify the rest of the compoenents
+    TPS->>Analytics: Send analytics events
+  else User don't have balance
+    TPS->>Notification: Publish clear reject event
+    TPS->>Analytics: Send analytics events
+  end
+```
