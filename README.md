@@ -82,6 +82,16 @@ sequenceDiagram
   end
 ```
 
+### Getting transaction history
+```mermaid
+sequenceDiagram
+  Service->>Gateway: Get user's transactions
+  Gateway->>TPS: Get transactions
+  TPS->>TPS: Get events for the user
+  TPS->>TPS: Set the latest status to the response
+  TPS->>Gateway: Replay back with transactions (I have omitted pagination in the imeplementation for simplicity)
+```
+
 ## Running the project
 ### System Requirements
 - protoc
