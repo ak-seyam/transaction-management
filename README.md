@@ -33,7 +33,7 @@ sequenceDiagram
   Gateway->>TPS: Submit Auth event
   TPS-->>Kafka: Create event
   TPS->>Gateway: Ack
-  Gateway->>PSP: Final status
+  Gateway->>PSP: REC status
   Kafka-->>TPS: Get transaction event
   TPS->>TPS: Check user balance
   alt User have enough bakance
